@@ -31,7 +31,6 @@ function Pagination({ page, totalPages, history }) {
 Pagination.propTypes = {
   page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
-  data: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 };
 
