@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from '../Header';
 
 const LinkList = lazy(() => import('../LinkList'));
@@ -14,10 +14,12 @@ function App() {
       <div className="ph3 pv1 background-gray">
         <Suspense fallback={null}>
           <Switch>
-            <Route exact path="/" component={LinkList} />
+            <Redirect exact from="/" to="/new/1" />
             <Route exact path="/create" component={CreateLink} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/search" component={Search} />
+            <Route exact path="/top" component={LinkList} />
+            <Route exact path="/new/:page" component={LinkList} />
           </Switch>
         </Suspense>
       </div>
