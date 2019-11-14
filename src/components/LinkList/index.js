@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Link from '../Link';
+import Pagination from '../Pagination';
 import { LINKS_PER_PAGE } from '../../constants';
 import { LINK_FRAGMENT } from '../../fragments';
 
@@ -111,20 +112,6 @@ function LinkList({ match, location, history }) {
     return rankedLinks;
   };
 
-  const nextPage = data => {
-    if (page <= data.feed.count / LINKS_PER_PAGE) {
-      const nextPage = page + 1;
-      history.push(`/new/${nextPage}`);
-    }
-  };
-
-  const previousPage = () => {
-    if (page > 1) {
-      const previousPage = page - 1;
-      history.push(`/new/${previousPage}`);
-    }
-  };
-
   return (
     <Query query={FEED_QUERY} variables={getQueryVariables()}>
       {({ loading, error, data, subscribeToMore }) => {
@@ -154,14 +141,11 @@ function LinkList({ match, location, history }) {
               ))}
             </ul>
             {isNewPage && (
-              <div className="flex ml4 mv3 gray">
-                <button className="pointer mr2" onClick={previousPage}>
-                  Previous
-                </button>
-                <button className="pointer" onClick={() => nextPage(data)}>
-                  Next
-                </button>
-              </div>
+              <Pagination
+                page={page}
+                totalPages={data.feed.count / LINKS_PER_PAGE}
+                history={history}
+              />
             )}
           </>
         );
