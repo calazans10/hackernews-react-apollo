@@ -5,6 +5,7 @@ import Header from '../Header';
 const LinkList = lazy(() => import('../LinkList'));
 const CreateLink = lazy(() => import('../CreateLink'));
 const Login = lazy(() => import('../Login'));
+const Search = lazy(() => import('../Search'));
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route exact path="/" component={LinkList} />
             <Route exact path="/create" component={CreateLink} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/search" component={Search} />
           </Switch>
         </Suspense>
       </div>
